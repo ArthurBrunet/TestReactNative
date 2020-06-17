@@ -1,24 +1,25 @@
-import React, {Component} from 'react';
-import Home from './components/Home.js';
-import {View, Text} from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Home from './components/Home';
+import Description from './components/Description';
+import Parameter from './components/Parameter';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default class App extends Component {
+const Stack = createStackNavigator();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 0
-    }
-  }
+const Tab = createBottomTabNavigator();
 
-  render() {
+function App() {
     return (
-      <View>
-        <Home valueInput={this.state.value}/>
-        <Text>
-          {this.state.value}
-        </Text>
-      </View>
+        <NavigationContainer>
+            <Tab.Navigator>
+                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen name="Details" component={Description} />
+                <Stack.Screen name="Parameter" component={Parameter} />
+            </Tab.Navigator>
+        </NavigationContainer>
     );
-  }
 }
+
+export default App;
