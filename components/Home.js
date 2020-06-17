@@ -1,25 +1,39 @@
 import React, {Component} from 'react';
 import {Text, TextInput, View, Button} from 'react-native';
+import { connect } from 'react-redux'
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        valueInput: props.valueInput
+
+
+const mapStateToProps = (state) => {
+    return {
+        favoritesFilm: state.favoritesFilm
     }
-  }
+}
+
+
+class Home extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+
 
   render() {
+        console.log(this.props.favoritesFilm);
     return (
       <View>
-        <TextInput value={this.state.valueInput} onChangeText={(text) => this.setState({valueInput : text})}/>
-        <Button onPress={() => {console.log(this.state.valueInput)}} title="Le Button test" />
-          <Button
-              title="Go to Details... again"
-              onPress={() => this.props.navigation.navigate('Details')}
-          />
-        <Text>Hello, I am test component HOME !</Text>
+          <Text>Liste des films</Text>
+          {
+              this.props.favoritesFilm.map( (item,key) => {
+                  return (
+                      <Text>{ item }</Text>
+                  )
+              })
+          }
       </View>
     );
   }
 }
+
+
+export default connect(mapStateToProps)(Home)
