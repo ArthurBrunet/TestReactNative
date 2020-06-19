@@ -19,12 +19,11 @@ class Home extends Component {
 
 
   render() {
-        console.log(this.props.favoritesFilm);
     return (
       <View>
           <Text>Liste des films</Text>
           {
-              this.props.favoritesFilm.map( (item,key) => {
+              this.props.favoritesFilm.map( (item) => {
                   return (
                       <Text>{ item }</Text>
                   )
